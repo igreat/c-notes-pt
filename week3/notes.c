@@ -30,6 +30,7 @@ int main() {
     // play around using https://pythontutor.com/c.html#mode=edit
     // - function arguments are passed by value (copy)
     int x = 69;
+    printf("x = %p\n", &x);
     change_x(&x);
     printf("x = %d\n", x);
 
