@@ -2,9 +2,10 @@
 
 // - when we pass a pointer like &x, we are passing a copy of the address of x
 //   to the function
-// - by dereferencing the pointer, we can then modify the original variable (x
-//   here actually lives inside the main stack, not the change_x stack)
-void change_x(int *x) { *x = 420; }
+// - by dereferencing the pointer, we can then modify the original variable
+// - Note: ptr_x here lives inside the change_x stack frame, but *ptr_x, aka x,
+//         lives inside the main stack frame
+void change_x(int *ptr_x) { *ptr_x = 420; }
 
 int main() {
     // MEMORY LAYOUT
