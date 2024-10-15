@@ -24,7 +24,6 @@ int main() {
     for (int i = 0; name[i]; i++) {
         printf("%c\n", name[i]);
     }
-
-    // MEMORY
+    
     return 0;
 }

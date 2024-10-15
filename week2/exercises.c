@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 /* Write a function that will compute the dot product of two arrays
    Assume that the arrays are of the same length
@@ -16,15 +17,17 @@ int dot_product(int a[], int b[], int size) {
    An anagram is a string formed by rearranging the letters of a different
    string. Example: "cat" and "act" are anagrams of each other
 */
-bool is_anagram(char a[], char b[]) { 
-    // alternative: represent each string's frequencies as two arrays of size 26.
+bool is_anagram(char a[], char b[]) {
+    // alternative: represent each string's frequencies as two arrays of
+    // size 26.
     //              freq_ids    = {'a', 'b', ..., 'z'}
     //              freq_counts = { 0,   0, ...,   0 }
-    //              each frequency lookup is then a linear scan to find the correct index of 
-    //              freq_counts that corresponds to the character in freq_ids
+    //              each frequency lookup is then a linear scan to find the
+    //              correct index of freq_counts that corresponds to the
+    //              character in freq_ids
 
-    int freq_a[26] = {0}; // initialize all elements to 0
-    int freq_b[26] = {0}; // initialize all elements to 0
+    int freq_a[26] = {0};  // initialize all elements to 0
+    int freq_b[26] = {0};  // initialize all elements to 0
 
     // (c - 'a'), 'a' -> 0, 'b' -> 1, ..., 'z' -> 25
 
@@ -36,7 +39,8 @@ bool is_anagram(char a[], char b[]) {
         freq_b[b[i] - 'a']++;
     }
 
-    // compare frequencies for each character (as soon as we find a mismatch, return false)
+    // compare frequencies for each character (as soon as we find a mismatch,
+    // return false)
     for (char c = 'a'; c <= 'z'; c++) {
         if (freq_a[c - 'a'] != freq_b[c - 'a']) {
             return false;
@@ -44,12 +48,32 @@ bool is_anagram(char a[], char b[]) {
     }
     return true;
 }
-    
-    
+
 /* Write a function that will check if an array of integers contains a duplicate
    Constrains: all integers are between 0 and 1000 (inclusive)
 */
-bool contains_duplicate(int a[], int size) { return false; }
+bool contains_duplicate(int a[], int size) {
+    bool visited[1001] = {false};
+    for (int i = 0; i < size; i++) {
+        if (visited[a[i]]) {
+            return true;
+        }
+        visited[a[i]] = true;
+    }
+    return false;
+}
+
+bool contains_duplicate_bruteforce(int a[], int size) {
+    for (int i = 0; i < size; i++) {
+        // j = i + 1 to ensure i < j, and we don't repeat say (i, j) and (j, i)
+        for (int j = i + 1; j < size; j++) {
+            if (a[i] == a[j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 void test_dot_product() {
     int a[] = {1, 2, 3, 4, 5};
@@ -85,5 +109,5 @@ void test_contains_duplicate() {
 int main() {
     test_dot_product();
     test_is_anagram();
-    // test_contains_duplicate();
+    test_contains_duplicate();
 }
