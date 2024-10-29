@@ -81,11 +81,6 @@ int main() {
     // 
     // arr[i] = *(arr + i)
     // i[arr] = *(i + arr) = *(arr + i)
-
-    // DYNAMIC MEMORY ALLOCATION
     
-
-    // FREEING MEMORY
-
     return 0;
 }
